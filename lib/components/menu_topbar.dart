@@ -1,6 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:teste_anim_color/components/padding_device.dart';
+import 'package:flutter/rendering.dart';
+import 'package:teste_anim_color/helpers/is_web.dart';
+import 'package:teste_anim_color/helpers/padding_device.dart';
 import 'package:teste_anim_color/pages/tabs.dart';
 
 class TopbarMenu extends StatelessWidget {
@@ -24,26 +26,76 @@ class TopbarMenu extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text("Otavio Miguel"),
+                    child: Text(
+                      "Otavio Miguel",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ),
                   Expanded(
                     child: Align(
                       heightFactor: 1.0,
                       alignment: Alignment.topRight,
-                      child: TabBar(
-                        dragStartBehavior: DragStartBehavior.down,
-                        controller: _controller,
-                        labelColor: Colors.black,
-                        unselectedLabelColor: Colors.grey,
-                        indicatorSize: TabBarIndicatorSize.label,
-                        tabs: SessionPageTabs.getTabs(),
-                        isScrollable: true,
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            TabBar(
+                              mouseCursor: SystemMouseCursors.click,
+                              controller: _controller,
+                              labelColor: Colors.white,
+                              unselectedLabelColor: Colors.redAccent,
+                              indicator: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100.0),
+                                  gradient: LinearGradient(colors: [
+                                    Colors.redAccent,
+                                    Colors.purple
+                                  ])),
+                              indicatorColor: Colors.black,
+                              tabs: SessionPageTabs.getTabs(),
+                              isScrollable: true,
+                            ),
+                            Visibility(
+                              child: IconButton(
+                                icon: Icon(Icons.add),
+                                tooltip: "Instagram",
+                                onPressed: () {},
+                              ),
+                              visible: IsWeb.check(),
+                            ),
+                            Visibility(
+                              child: IconButton(
+                                icon: Icon(Icons.people),
+                                tooltip: "LinkedIn",
+                                onPressed: () {},
+                              ),
+                              visible: IsWeb.check(),
+                            ),
+                            Visibility(
+                              child: IconButton(
+                                icon: Icon(Icons.more),
+                                tooltip: "Github",
+                                onPressed: () {},
+                              ),
+                              visible: IsWeb.check(),
+                            ),
+                            Visibility(
+                              child: IconButton(
+                                icon: Icon(Icons.plus_one),
+                                tooltip: "Gitlab",
+                                onPressed: () {},
+                              ),
+                              visible: IsWeb.check(),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   )
                 ],
               ),
               width: double.infinity,
+              height: 50.0,
             ),
           ),
         ),

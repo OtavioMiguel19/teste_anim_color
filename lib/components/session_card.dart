@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:teste_anim_color/components/padding_device.dart';
+import 'package:teste_anim_color/helpers/padding_device.dart';
 
 class SessionCard extends StatelessWidget {
   final Widget _child;

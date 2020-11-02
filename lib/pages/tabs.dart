@@ -10,6 +10,7 @@ class SessionPageTabs {
     _pages.add(PageTabs.build("Experiences", SessionCard(Text("d"))));
     _pages.add(PageTabs.build("Projects", SessionCard(Text("e"))));
     _pages.add(PageTabs.build("Languages", SessionCard(Text("f"))));
+    _pages.add(PageTabs.build("Contact", SessionCard(Text("g"))));
     return _pages;
   }
 
@@ -17,7 +18,15 @@ class SessionPageTabs {
     List<Tab> _tabs = List();
     for (PageTabs page in getPages()) {
       _tabs.add(Tab(
-        text: page.title,
+        child: Container(
+          child: Align(
+            alignment: Alignment.center,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text(page.title.toUpperCase()),
+            ),
+          ),
+        ),
       ));
     }
     return _tabs;
